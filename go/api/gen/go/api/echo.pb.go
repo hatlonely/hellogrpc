@@ -30,7 +30,7 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-type StringMessage struct {
+type EchoReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -38,8 +38,8 @@ type StringMessage struct {
 	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
-func (x *StringMessage) Reset() {
-	*x = StringMessage{}
+func (x *EchoReq) Reset() {
+	*x = EchoReq{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_api_echo_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -47,13 +47,13 @@ func (x *StringMessage) Reset() {
 	}
 }
 
-func (x *StringMessage) String() string {
+func (x *EchoReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StringMessage) ProtoMessage() {}
+func (*EchoReq) ProtoMessage() {}
 
-func (x *StringMessage) ProtoReflect() protoreflect.Message {
+func (x *EchoReq) ProtoReflect() protoreflect.Message {
 	mi := &file_api_echo_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -65,16 +65,236 @@ func (x *StringMessage) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StringMessage.ProtoReflect.Descriptor instead.
-func (*StringMessage) Descriptor() ([]byte, []int) {
+// Deprecated: Use EchoReq.ProtoReflect.Descriptor instead.
+func (*EchoReq) Descriptor() ([]byte, []int) {
 	return file_api_echo_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *StringMessage) GetValue() string {
+func (x *EchoReq) GetValue() string {
 	if x != nil {
 		return x.Value
 	}
 	return ""
+}
+
+type EchoRes struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+}
+
+func (x *EchoRes) Reset() {
+	*x = EchoRes{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_echo_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EchoRes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EchoRes) ProtoMessage() {}
+
+func (x *EchoRes) ProtoReflect() protoreflect.Message {
+	mi := &file_api_echo_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EchoRes.ProtoReflect.Descriptor instead.
+func (*EchoRes) Descriptor() ([]byte, []int) {
+	return file_api_echo_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *EchoRes) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+type Info struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Op string `protobuf:"bytes,1,opt,name=op,proto3" json:"op,omitempty"`
+	A  int64  `protobuf:"varint,2,opt,name=a,proto3" json:"a,omitempty"`
+	B  int64  `protobuf:"varint,3,opt,name=b,proto3" json:"b,omitempty"`
+}
+
+func (x *Info) Reset() {
+	*x = Info{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_echo_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Info) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Info) ProtoMessage() {}
+
+func (x *Info) ProtoReflect() protoreflect.Message {
+	mi := &file_api_echo_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Info.ProtoReflect.Descriptor instead.
+func (*Info) Descriptor() ([]byte, []int) {
+	return file_api_echo_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Info) GetOp() string {
+	if x != nil {
+		return x.Op
+	}
+	return ""
+}
+
+func (x *Info) GetA() int64 {
+	if x != nil {
+		return x.A
+	}
+	return 0
+}
+
+func (x *Info) GetB() int64 {
+	if x != nil {
+		return x.B
+	}
+	return 0
+}
+
+type CalReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Uid  string `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`
+	Info *Info  `protobuf:"bytes,2,opt,name=info,proto3" json:"info,omitempty"`
+}
+
+func (x *CalReq) Reset() {
+	*x = CalReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_echo_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CalReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CalReq) ProtoMessage() {}
+
+func (x *CalReq) ProtoReflect() protoreflect.Message {
+	mi := &file_api_echo_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CalReq.ProtoReflect.Descriptor instead.
+func (*CalReq) Descriptor() ([]byte, []int) {
+	return file_api_echo_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CalReq) GetUid() string {
+	if x != nil {
+		return x.Uid
+	}
+	return ""
+}
+
+func (x *CalReq) GetInfo() *Info {
+	if x != nil {
+		return x.Info
+	}
+	return nil
+}
+
+type CalRes struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Uid    string `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`
+	Result int64  `protobuf:"varint,2,opt,name=result,proto3" json:"result,omitempty"`
+}
+
+func (x *CalRes) Reset() {
+	*x = CalRes{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_echo_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CalRes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CalRes) ProtoMessage() {}
+
+func (x *CalRes) ProtoReflect() protoreflect.Message {
+	mi := &file_api_echo_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CalRes.ProtoReflect.Descriptor instead.
+func (*CalRes) Descriptor() ([]byte, []int) {
+	return file_api_echo_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CalRes) GetUid() string {
+	if x != nil {
+		return x.Uid
+	}
+	return ""
+}
+
+func (x *CalRes) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
 }
 
 var File_api_echo_proto protoreflect.FileDescriptor
@@ -83,19 +303,36 @@ var file_api_echo_proto_rawDesc = []byte{
 	0x0a, 0x0e, 0x61, 0x70, 0x69, 0x2f, 0x65, 0x63, 0x68, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x12, 0x07, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x1a, 0x1c, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
 	0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x25, 0x0a, 0x0d, 0x53, 0x74, 0x72, 0x69, 0x6e,
-	0x67, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75,
-	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x32, 0x62,
-	0x0a, 0x0b, 0x59, 0x6f, 0x75, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x53, 0x0a,
-	0x04, 0x45, 0x63, 0x68, 0x6f, 0x12, 0x16, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e,
-	0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x1a, 0x16, 0x2e,
-	0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x4d, 0x65,
-	0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x1b, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x15, 0x22, 0x10, 0x2f,
-	0x76, 0x31, 0x2f, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2f, 0x65, 0x63, 0x68, 0x6f, 0x3a,
-	0x01, 0x2a, 0x42, 0x2f, 0x5a, 0x2d, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
-	0x2f, 0x68, 0x61, 0x74, 0x6c, 0x6f, 0x6e, 0x65, 0x6c, 0x79, 0x2f, 0x68, 0x65, 0x6c, 0x6c, 0x6f,
-	0x67, 0x72, 0x70, 0x63, 0x2f, 0x67, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x65, 0x78, 0x61, 0x6d,
-	0x70, 0x6c, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x1f, 0x0a, 0x07, 0x45, 0x63, 0x68, 0x6f, 0x52,
+	0x65, 0x71, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x1f, 0x0a, 0x07, 0x45, 0x63, 0x68, 0x6f,
+	0x52, 0x65, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x32, 0x0a, 0x04, 0x49, 0x6e, 0x66,
+	0x6f, 0x12, 0x0e, 0x0a, 0x02, 0x6f, 0x70, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x6f,
+	0x70, 0x12, 0x0c, 0x0a, 0x01, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x01, 0x61, 0x12,
+	0x0c, 0x0a, 0x01, 0x62, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x01, 0x62, 0x22, 0x3d, 0x0a,
+	0x06, 0x43, 0x61, 0x6c, 0x52, 0x65, 0x71, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x75, 0x69, 0x64, 0x12, 0x21, 0x0a, 0x04, 0x69, 0x6e, 0x66,
+	0x6f, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c,
+	0x65, 0x2e, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x04, 0x69, 0x6e, 0x66, 0x6f, 0x22, 0x32, 0x0a, 0x06,
+	0x43, 0x61, 0x6c, 0x52, 0x65, 0x73, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x03, 0x75, 0x69, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75,
+	0x6c, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74,
+	0x32, 0x56, 0x0a, 0x0b, 0x45, 0x63, 0x68, 0x6f, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12,
+	0x47, 0x0a, 0x04, 0x45, 0x63, 0x68, 0x6f, 0x12, 0x10, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c,
+	0x65, 0x2e, 0x45, 0x63, 0x68, 0x6f, 0x52, 0x65, 0x71, 0x1a, 0x10, 0x2e, 0x65, 0x78, 0x61, 0x6d,
+	0x70, 0x6c, 0x65, 0x2e, 0x45, 0x63, 0x68, 0x6f, 0x52, 0x65, 0x73, 0x22, 0x1b, 0x82, 0xd3, 0xe4,
+	0x93, 0x02, 0x15, 0x22, 0x10, 0x2f, 0x76, 0x31, 0x2f, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65,
+	0x2f, 0x65, 0x63, 0x68, 0x6f, 0x3a, 0x01, 0x2a, 0x32, 0x5a, 0x0a, 0x0a, 0x43, 0x61, 0x6c, 0x53,
+	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x4c, 0x0a, 0x03, 0x43, 0x61, 0x6c, 0x12, 0x0f, 0x2e,
+	0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x43, 0x61, 0x6c, 0x52, 0x65, 0x71, 0x1a, 0x0f,
+	0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x43, 0x61, 0x6c, 0x52, 0x65, 0x73, 0x22,
+	0x23, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1d, 0x22, 0x15, 0x2f, 0x76, 0x32, 0x2f, 0x65, 0x78, 0x61,
+	0x6d, 0x70, 0x6c, 0x65, 0x2f, 0x63, 0x61, 0x6c, 0x2f, 0x7b, 0x75, 0x69, 0x64, 0x7d, 0x3a, 0x04,
+	0x69, 0x6e, 0x66, 0x6f, 0x42, 0x2f, 0x5a, 0x2d, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
+	0x6f, 0x6d, 0x2f, 0x68, 0x61, 0x74, 0x6c, 0x6f, 0x6e, 0x65, 0x6c, 0x79, 0x2f, 0x68, 0x65, 0x6c,
+	0x6c, 0x6f, 0x67, 0x72, 0x70, 0x63, 0x2f, 0x67, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x65, 0x78,
+	0x61, 0x6d, 0x70, 0x6c, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -110,18 +347,25 @@ func file_api_echo_proto_rawDescGZIP() []byte {
 	return file_api_echo_proto_rawDescData
 }
 
-var file_api_echo_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_api_echo_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_api_echo_proto_goTypes = []interface{}{
-	(*StringMessage)(nil), // 0: example.StringMessage
+	(*EchoReq)(nil), // 0: example.EchoReq
+	(*EchoRes)(nil), // 1: example.EchoRes
+	(*Info)(nil),    // 2: example.Info
+	(*CalReq)(nil),  // 3: example.CalReq
+	(*CalRes)(nil),  // 4: example.CalRes
 }
 var file_api_echo_proto_depIdxs = []int32{
-	0, // 0: example.YourService.Echo:input_type -> example.StringMessage
-	0, // 1: example.YourService.Echo:output_type -> example.StringMessage
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	2, // 0: example.CalReq.info:type_name -> example.Info
+	0, // 1: example.EchoService.Echo:input_type -> example.EchoReq
+	3, // 2: example.CalService.Cal:input_type -> example.CalReq
+	1, // 3: example.EchoService.Echo:output_type -> example.EchoRes
+	4, // 4: example.CalService.Cal:output_type -> example.CalRes
+	3, // [3:5] is the sub-list for method output_type
+	1, // [1:3] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_api_echo_proto_init() }
@@ -131,7 +375,55 @@ func file_api_echo_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_api_echo_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StringMessage); i {
+			switch v := v.(*EchoReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_echo_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EchoRes); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_echo_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Info); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_echo_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CalReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_echo_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CalRes); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -149,9 +441,9 @@ func file_api_echo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_api_echo_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   5,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_api_echo_proto_goTypes,
 		DependencyIndexes: file_api_echo_proto_depIdxs,
@@ -171,72 +463,144 @@ var _ grpc.ClientConnInterface
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion6
 
-// YourServiceClient is the client API for YourService service.
+// EchoServiceClient is the client API for EchoService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type YourServiceClient interface {
-	Echo(ctx context.Context, in *StringMessage, opts ...grpc.CallOption) (*StringMessage, error)
+type EchoServiceClient interface {
+	Echo(ctx context.Context, in *EchoReq, opts ...grpc.CallOption) (*EchoRes, error)
 }
 
-type yourServiceClient struct {
+type echoServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewYourServiceClient(cc grpc.ClientConnInterface) YourServiceClient {
-	return &yourServiceClient{cc}
+func NewEchoServiceClient(cc grpc.ClientConnInterface) EchoServiceClient {
+	return &echoServiceClient{cc}
 }
 
-func (c *yourServiceClient) Echo(ctx context.Context, in *StringMessage, opts ...grpc.CallOption) (*StringMessage, error) {
-	out := new(StringMessage)
-	err := c.cc.Invoke(ctx, "/example.YourService/Echo", in, out, opts...)
+func (c *echoServiceClient) Echo(ctx context.Context, in *EchoReq, opts ...grpc.CallOption) (*EchoRes, error) {
+	out := new(EchoRes)
+	err := c.cc.Invoke(ctx, "/example.EchoService/Echo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// YourServiceServer is the server API for YourService service.
-type YourServiceServer interface {
-	Echo(context.Context, *StringMessage) (*StringMessage, error)
+// EchoServiceServer is the server API for EchoService service.
+type EchoServiceServer interface {
+	Echo(context.Context, *EchoReq) (*EchoRes, error)
 }
 
-// UnimplementedYourServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedYourServiceServer struct {
+// UnimplementedEchoServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedEchoServiceServer struct {
 }
 
-func (*UnimplementedYourServiceServer) Echo(context.Context, *StringMessage) (*StringMessage, error) {
+func (*UnimplementedEchoServiceServer) Echo(context.Context, *EchoReq) (*EchoRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Echo not implemented")
 }
 
-func RegisterYourServiceServer(s *grpc.Server, srv YourServiceServer) {
-	s.RegisterService(&_YourService_serviceDesc, srv)
+func RegisterEchoServiceServer(s *grpc.Server, srv EchoServiceServer) {
+	s.RegisterService(&_EchoService_serviceDesc, srv)
 }
 
-func _YourService_Echo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StringMessage)
+func _EchoService_Echo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EchoReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(YourServiceServer).Echo(ctx, in)
+		return srv.(EchoServiceServer).Echo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/example.YourService/Echo",
+		FullMethod: "/example.EchoService/Echo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(YourServiceServer).Echo(ctx, req.(*StringMessage))
+		return srv.(EchoServiceServer).Echo(ctx, req.(*EchoReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _YourService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "example.YourService",
-	HandlerType: (*YourServiceServer)(nil),
+var _EchoService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "example.EchoService",
+	HandlerType: (*EchoServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Echo",
-			Handler:    _YourService_Echo_Handler,
+			Handler:    _EchoService_Echo_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "api/echo.proto",
+}
+
+// CalServiceClient is the client API for CalService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type CalServiceClient interface {
+	Cal(ctx context.Context, in *CalReq, opts ...grpc.CallOption) (*CalRes, error)
+}
+
+type calServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCalServiceClient(cc grpc.ClientConnInterface) CalServiceClient {
+	return &calServiceClient{cc}
+}
+
+func (c *calServiceClient) Cal(ctx context.Context, in *CalReq, opts ...grpc.CallOption) (*CalRes, error) {
+	out := new(CalRes)
+	err := c.cc.Invoke(ctx, "/example.CalService/Cal", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CalServiceServer is the server API for CalService service.
+type CalServiceServer interface {
+	Cal(context.Context, *CalReq) (*CalRes, error)
+}
+
+// UnimplementedCalServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedCalServiceServer struct {
+}
+
+func (*UnimplementedCalServiceServer) Cal(context.Context, *CalReq) (*CalRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Cal not implemented")
+}
+
+func RegisterCalServiceServer(s *grpc.Server, srv CalServiceServer) {
+	s.RegisterService(&_CalService_serviceDesc, srv)
+}
+
+func _CalService_Cal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CalReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CalServiceServer).Cal(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/example.CalService/Cal",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CalServiceServer).Cal(ctx, req.(*CalReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _CalService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "example.CalService",
+	HandlerType: (*CalServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Cal",
+			Handler:    _CalService_Cal_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

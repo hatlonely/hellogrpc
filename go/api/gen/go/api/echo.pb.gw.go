@@ -31,8 +31,8 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = descriptor.ForMessage
 
-func request_YourService_Echo_0(ctx context.Context, marshaler runtime.Marshaler, client YourServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq StringMessage
+func request_EchoService_Echo_0(ctx context.Context, marshaler runtime.Marshaler, client EchoServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq EchoReq
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -48,8 +48,8 @@ func request_YourService_Echo_0(ctx context.Context, marshaler runtime.Marshaler
 
 }
 
-func local_request_YourService_Echo_0(ctx context.Context, marshaler runtime.Marshaler, server YourServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq StringMessage
+func local_request_EchoService_Echo_0(ctx context.Context, marshaler runtime.Marshaler, server EchoServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq EchoReq
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -65,12 +65,82 @@ func local_request_YourService_Echo_0(ctx context.Context, marshaler runtime.Mar
 
 }
 
-// RegisterYourServiceHandlerServer registers the http handlers for service YourService to "mux".
-// UnaryRPC     :call YourServiceServer directly.
-// StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-func RegisterYourServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server YourServiceServer) error {
+func request_CalService_Cal_0(ctx context.Context, marshaler runtime.Marshaler, client CalServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CalReq
+	var metadata runtime.ServerMetadata
 
-	mux.Handle("POST", pattern_YourService_Echo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq.Info); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["uid"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "uid")
+	}
+
+	protoReq.Uid, err = runtime.String(val)
+
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "uid", err)
+	}
+
+	msg, err := client.Cal(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_CalService_Cal_0(ctx context.Context, marshaler runtime.Marshaler, server CalServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CalReq
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq.Info); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["uid"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "uid")
+	}
+
+	protoReq.Uid, err = runtime.String(val)
+
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "uid", err)
+	}
+
+	msg, err := server.Cal(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+// RegisterEchoServiceHandlerServer registers the http handlers for service EchoService to "mux".
+// UnaryRPC     :call EchoServiceServer directly.
+// StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
+func RegisterEchoServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server EchoServiceServer) error {
+
+	mux.Handle("POST", pattern_EchoService_Echo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -79,23 +149,51 @@ func RegisterYourServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_YourService_Echo_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_EchoService_Echo_0(rctx, inboundMarshaler, server, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_YourService_Echo_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_EchoService_Echo_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
 	return nil
 }
 
-// RegisterYourServiceHandlerFromEndpoint is same as RegisterYourServiceHandler but
+// RegisterCalServiceHandlerServer registers the http handlers for service CalService to "mux".
+// UnaryRPC     :call CalServiceServer directly.
+// StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
+func RegisterCalServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server CalServiceServer) error {
+
+	mux.Handle("POST", pattern_CalService_Cal_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_CalService_Cal_0(rctx, inboundMarshaler, server, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_CalService_Cal_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	return nil
+}
+
+// RegisterEchoServiceHandlerFromEndpoint is same as RegisterEchoServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterYourServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterEchoServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.Dial(endpoint, opts...)
 	if err != nil {
 		return err
@@ -115,23 +213,23 @@ func RegisterYourServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.Se
 		}()
 	}()
 
-	return RegisterYourServiceHandler(ctx, mux, conn)
+	return RegisterEchoServiceHandler(ctx, mux, conn)
 }
 
-// RegisterYourServiceHandler registers the http handlers for service YourService to "mux".
+// RegisterEchoServiceHandler registers the http handlers for service EchoService to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterYourServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterYourServiceHandlerClient(ctx, mux, NewYourServiceClient(conn))
+func RegisterEchoServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterEchoServiceHandlerClient(ctx, mux, NewEchoServiceClient(conn))
 }
 
-// RegisterYourServiceHandlerClient registers the http handlers for service YourService
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "YourServiceClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "YourServiceClient"
+// RegisterEchoServiceHandlerClient registers the http handlers for service EchoService
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "EchoServiceClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "EchoServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "YourServiceClient" to call the correct interceptors.
-func RegisterYourServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client YourServiceClient) error {
+// "EchoServiceClient" to call the correct interceptors.
+func RegisterEchoServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client EchoServiceClient) error {
 
-	mux.Handle("POST", pattern_YourService_Echo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_EchoService_Echo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -140,14 +238,14 @@ func RegisterYourServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_YourService_Echo_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_EchoService_Echo_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_YourService_Echo_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_EchoService_Echo_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -155,9 +253,78 @@ func RegisterYourServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 }
 
 var (
-	pattern_YourService_Echo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "example", "echo"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_EchoService_Echo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "example", "echo"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (
-	forward_YourService_Echo_0 = runtime.ForwardResponseMessage
+	forward_EchoService_Echo_0 = runtime.ForwardResponseMessage
+)
+
+// RegisterCalServiceHandlerFromEndpoint is same as RegisterCalServiceHandler but
+// automatically dials to "endpoint" and closes the connection when "ctx" gets done.
+func RegisterCalServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+	conn, err := grpc.Dial(endpoint, opts...)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		if err != nil {
+			if cerr := conn.Close(); cerr != nil {
+				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+			}
+			return
+		}
+		go func() {
+			<-ctx.Done()
+			if cerr := conn.Close(); cerr != nil {
+				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+			}
+		}()
+	}()
+
+	return RegisterCalServiceHandler(ctx, mux, conn)
+}
+
+// RegisterCalServiceHandler registers the http handlers for service CalService to "mux".
+// The handlers forward requests to the grpc endpoint over "conn".
+func RegisterCalServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterCalServiceHandlerClient(ctx, mux, NewCalServiceClient(conn))
+}
+
+// RegisterCalServiceHandlerClient registers the http handlers for service CalService
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "CalServiceClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "CalServiceClient"
+// doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
+// "CalServiceClient" to call the correct interceptors.
+func RegisterCalServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client CalServiceClient) error {
+
+	mux.Handle("POST", pattern_CalService_Cal_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_CalService_Cal_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_CalService_Cal_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	return nil
+}
+
+var (
+	pattern_CalService_Cal_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v2", "example", "cal", "uid"}, "", runtime.AssumeColonVerbOpt(true)))
+)
+
+var (
+	forward_CalService_Cal_0 = runtime.ForwardResponseMessage
 )

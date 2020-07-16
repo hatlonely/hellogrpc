@@ -5,15 +5,44 @@ option go_package = "github.com/hatlonely/hellogrpc/go/api/example";
 
 import "google/api/annotations.proto";
 
-message StringMessage {
+message EchoReq {
   string value = 1;
 }
 
-service YourService {
-     rpc Echo(StringMessage) returns (StringMessage) {
-          option (google.api.http) = {
-              post: "/v1/example/echo"
-              body: "*"
-          };
-      }
+message EchoRes {
+  string value = 1;
+}
+
+service EchoService {
+   rpc Echo(EchoReq) returns (EchoRes) {
+      option (google.api.http) = {
+        post: "/v1/example/echo",
+        body: "*"
+      };
+    }
+}
+
+message Info {
+  string op = 1;
+  int64 a = 2;
+  int64 b = 3;
+}
+
+message CalReq {
+  string uid = 1;
+  Info info = 2;
+}
+
+message CalRes {
+  string uid = 1;
+  int64 result = 2;
+}
+
+service CalService {
+  rpc Cal(CalReq) returns (CalRes) {
+    option (google.api.http) = {
+      post: "/v2/example/cal/{uid}",
+      body: "info"
+    };
+  }
 }
