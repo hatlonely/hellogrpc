@@ -17,8 +17,8 @@ func main() {
 	}
 	defer conn.Close()
 
-	client := example.NewYourServiceClient(conn)
+	client := example.NewEchoServiceClient(conn)
 
-	res, err := client.Echo(context.Background(), &example.StringMessage{Value: "hello world"})
+	res, err := client.Echo(context.Background(), &example.EchoReq{Value: "hello world"})
 	fmt.Println(res, err)
 }
